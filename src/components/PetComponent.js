@@ -3,20 +3,31 @@ var React = require('react');
 class PetComponent extends React.Component{
 	constructor(props){
 		super(props);
+		this.state = {
+			likesCount: 0
+		};
 		this.handleLikeBtnClick = this.handleLikeBtnClick.bind(this);
 		this.handleDislikeBtnClick = this.handleDislikeBtnClick.bind(this);
 	}
 	handleLikeBtnClick(){
-		console.log(this.props.petName + ' Component Like Button');
+		this.setState((prevState) => {
+			return {
+				likesCount: prevState.likesCount + 1
+			}
+		});
 	}
 	handleDislikeBtnClick(){
-		console.log(this.props.petName + 'Component DisLike Button')
+		this.setState((prevState) => {
+			return {
+				likesCount: prevState.likesCount - 1
+			}
+		});
 	}
 
 	render(){
 		return (
 			<div className="comp">
-				<h3>{this.props.petName} Component</h3>
+				<h3>{this.props.petName} Likes: {this.state.likesCount}</h3>
 				<img
 					src={this.props.petImageUrl}
 					alt="cute pet"
