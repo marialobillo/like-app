@@ -1,0 +1,20 @@
+
+.pet_image{
+	height: 400px;
+}
+
+.comp{
+	display: inline-block;
+}
+
+
+.board{
+	padding: 0 ;
+	margin-top: 60px;
+	text-align: 'center';
+}
+
+
+.pet_btn{
+	margin:10px;
+}
