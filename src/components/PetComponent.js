@@ -1,20 +1,20 @@
 var React = require('react');
 
-class DogComponent extends React.Component{
+class PetComponent extends React.Component{
 	handleLikeBtnClick(){
-		console.log('DogComponent Like Button');
+		console.log(this.props.petName + ' Component Like Button');
 	}
 	handleDislikeBtnClick(){
-		console.log('DogComponent DisLike Button')
+		console.log(this.props.petName + 'Component DisLike Button')
 	}
 
 	render(){
 		return (
 			<div className="comp">
-				<h3>Dog Component</h3>
+				<h3>{this.props.petName} Component</h3>
 				<img
-					src="https://thiswallpaper.com/cdn/hdwallpapers/649/beautiful%20cute%20dog%20high%20resolution%20wallpaper.jpg"
-					alt="cute dog"
+					src={this.props.petImageUrl}
+					alt="cute pet"
 					className="pet_image"
 				/>
 				<br />
@@ -30,4 +30,4 @@ class DogComponent extends React.Component{
 }
 
 
-module.exports = DogComponent;
+module.exports = PetComponent;
