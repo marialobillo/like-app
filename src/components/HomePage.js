@@ -1,11 +1,19 @@
 var React = require('react')
 var PetComponent = require('./PetComponent');
 
+
+var style = {
+	textAlign : 'center',
+	fontSize: '2em',
+	color: 'rebeccapurple',
+	margin: '15px'
+};
+
 class HomePage extends React.Component{
 	render(){
 		return (
 			<div className="container">
-				<h1 style={style} >
+				<h1 className="title" >
 					Welcome to Cat and Dog Cuteness Fight Game!</h1>
 					<div className="row">
 								<PetComponent
@@ -21,13 +29,6 @@ class HomePage extends React.Component{
 		);
 	}
 }
-
-var style = {
-	textAlign : 'center',
-	fontSize: '2em',
-	color: 'rebeccapurple',
-	margin: '15px'
-};
 
 
 

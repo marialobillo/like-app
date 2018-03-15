@@ -18,3 +18,10 @@
 .pet_btn{
 	margin:10px;
 }
+
+.title{
+	textAlign : 'center';
+	fontSize: '2em';
+	color: #601DAD;
+	margin: '15p';
+}

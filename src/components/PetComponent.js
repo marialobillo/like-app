@@ -1,6 +1,11 @@
 var React = require('react');
 
 class PetComponent extends React.Component{
+	constructor(props){
+		super(props);
+		this.handleLikeBtnClick = this.handleLikeBtnClick.bind(this);
+		this.handleDislikeBtnClick = this.handleDislikeBtnClick.bind(this);
+	}
 	handleLikeBtnClick(){
 		console.log(this.props.petName + ' Component Like Button');
 	}
