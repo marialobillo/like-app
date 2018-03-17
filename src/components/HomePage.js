@@ -76,7 +76,9 @@ class HomePage extends React.Component{
 		this.setState(() => {
 			return {
 				catLikesCount: 0,
-				dogLikesCount: 0
+				dogLikesCount: 0,
+				catResult: '',
+				dogResult: ''
 			}
 		});
 	}
