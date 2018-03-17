@@ -14,7 +14,48 @@ class HomePage extends React.Component{
 		this.handleShowWinnerBtnClick = this.handleShowWinnerBtnClick.bind(this);
 		this.handleStartOverBtnClick = this.handleStartOverBtnClick.bind(this);
 	}
+	handleLikeBtnClick(event){
+		var petName = event.target.value;
+
+		if(petName === 'Cat'){
+			this.setState((prevState) => {
+				return {
+					catLikesCount: prevState.catLikesCount + 1,
+					dogLikesCount: prevState.dogLikesCount
+				}
+			});
+		} else if(petName === 'Dog'){
+			this.setState((prevState) => {
+				return {
+					catLikesCount: prevState.catLikesCount,
+					dogLikesCount: prevState.dogLikesCount + 1
+				}
+			});
+		}
+	}
+	handleDislikeBtnClick(event){
+		var petName = event.target.value;
+
+		if(petName === 'Cat'){
+			this.setState((prevState) => {
+				return {
+					catLikesCount: prevState.catLikesCount - 1,
+					dogLikesCount: prevState.dogLikesCount
+				}
+			});
+		} else if(petName === 'Dog'){
+			this.setState((prevState) => {
+				return {
+					catDislikesCount: prevState.catLikesCount,
+					dogLikesCount: prevState.dogLikesCount - 1
+				}
+			});
+		}
+	}
+
 	handleShowWinnerBtnClick(){
+		var catLikesCount = this.state.catLikesCount;
+		var dogLikesCount = this.state.dogLikesCount;
 		console.log(this.catCompInstRef);
 		console.log(this.dogCompInstRef);
 
@@ -25,12 +66,6 @@ class HomePage extends React.Component{
 		} else {
 			console.log('Game is a TIE');
 		}
-
-	}
-	handleLikeBtnClick(){
-
-	}
-	handleDislikeBtnClick(){
 
 	}
 	handleStartOverBtnClick(){
@@ -44,13 +79,17 @@ class HomePage extends React.Component{
 					<div className="row">
 								<PetComponent
 									petName="Cat"
-									likesCount={catLikesCount}
+									likesCount={this.state.catLikesCount}
 									petImageUrl="https://i.pinimg.com/originals/05/83/69/05836996c7f72c287ad227a937b03dc7.jpg"
+									onLikeBtnClick={this.handleLikeBtnClick}
+									onDislikeBtnClick={this.handleDislikeBtnClick}
 								/>
 								<PetComponent
 									petName="Dog"
-									likesCount={dogLikesCount}
+									likesCount={this.state.dogLikesCount}
 									petImageUrl="https://thiswallpaper.com/cdn/hdwallpapers/649/beautiful%20cute%20dog%20high%20resolution%20wallpaper.jpg"
+									onLikeBtnClick={this.handleLikeBtnClick}
+									onDislikeBtnClick={this.handleDislikeBtnClick}
 								/>
 					</div>
 					<div className="row boton">

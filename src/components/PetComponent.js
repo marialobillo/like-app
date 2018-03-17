@@ -18,10 +18,14 @@ class PetComponent extends React.Component{
 				<br />
 				<button
 					className="btn btn-warning btn-lg pet_btn"
-					onClick={this.handleLikeBtnClick}>Like</button>
+					onClick={this.props.onLikeBtnClick}
+					value={this.props.petName}
+					>Like</button>
 				<button
 					className="btn btn-secondary btn-lg pet_btn"
-					onClick={this.handleDislikeBtnClick}>Dislike</button>
+					onClick={this.props.onDislikeBtnClick}
+					value={this.props.petName}
+					>Dislike</button>
 			</div>
 		);
 	}
