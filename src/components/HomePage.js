@@ -7,8 +7,10 @@ class HomePage extends React.Component{
 		super(props);
 		this.state = {
 			catLikesCount: 0,
-			dogLikesCount: 0
-		}
+			dogLikesCount: 0,
+			catResult: '',
+			dogResult: ''
+		};
 		this.handleLikeBtnClick = this.handleLikeBtnClick.bind(this);
 		this.handleDislikeBtnClick = this.handleDislikeBtnClick.bind(this);
 		this.handleShowWinnerBtnClick = this.handleShowWinnerBtnClick.bind(this);
@@ -21,13 +23,11 @@ class HomePage extends React.Component{
 			this.setState((prevState) => {
 				return {
 					catLikesCount: prevState.catLikesCount + 1,
-					dogLikesCount: prevState.dogLikesCount
 				}
 			});
 		} else if(petName === 'Dog'){
 			this.setState((prevState) => {
 				return {
-					catLikesCount: prevState.catLikesCount,
 					dogLikesCount: prevState.dogLikesCount + 1
 				}
 			});
@@ -40,13 +40,11 @@ class HomePage extends React.Component{
 			this.setState((prevState) => {
 				return {
 					catLikesCount: prevState.catLikesCount - 1,
-					dogLikesCount: prevState.dogLikesCount
 				}
 			});
 		} else if(petName === 'Dog'){
 			this.setState((prevState) => {
 				return {
-					catDislikesCount: prevState.catLikesCount,
 					dogLikesCount: prevState.dogLikesCount - 1
 				}
 			});
@@ -56,20 +54,31 @@ class HomePage extends React.Component{
 	handleShowWinnerBtnClick(){
 		var catLikesCount = this.state.catLikesCount;
 		var dogLikesCount = this.state.dogLikesCount;
+		var catResult = 'TIE';
+		var dogResult = 'TIE';
+
 		console.log(this.catCompInstRef);
 		console.log(this.dogCompInstRef);
 
 		if(catLikesCount > dogLikesCount){
-			console.log('Cat is the Winner');
+			catResult = 'WINNER';
+			dogResult = 'LOSER';
 		} else if (catLikesCount < dogLikesCount){
-			console.log('Dog is the Winner');
-		} else {
-			console.log('Game is a TIE');
+			catResult = 'LOSER';
+			dogResult = 'WINNER';
 		}
-
+		this.setState({
+			catResult: catResult,
+			dogResult: dogResult
+		});
 	}
 	handleStartOverBtnClick(){
-
+		this.setState(() => {
+			return {
+				catLikesCount: 0,
+				dogLikesCount: 0
+			}
+		});
 	}
 	render(){
 		return (
@@ -81,6 +90,7 @@ class HomePage extends React.Component{
 									petName="Cat"
 									likesCount={this.state.catLikesCount}
 									petImageUrl="https://i.pinimg.com/originals/05/83/69/05836996c7f72c287ad227a937b03dc7.jpg"
+									result={this.state.catResult}
 									onLikeBtnClick={this.handleLikeBtnClick}
 									onDislikeBtnClick={this.handleDislikeBtnClick}
 								/>
@@ -88,6 +98,7 @@ class HomePage extends React.Component{
 									petName="Dog"
 									likesCount={this.state.dogLikesCount}
 									petImageUrl="https://thiswallpaper.com/cdn/hdwallpapers/649/beautiful%20cute%20dog%20high%20resolution%20wallpaper.jpg"
+									result={this.state.dogResult}
 									onLikeBtnClick={this.handleLikeBtnClick}
 									onDislikeBtnClick={this.handleDislikeBtnClick}
 								/>

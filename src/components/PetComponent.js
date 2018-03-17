@@ -2,8 +2,20 @@ var React = require('react');
 
 
 var PetComponent = function(props){
+	var result = null;
+
+	if (props.result !== ''){
+		var resultStyle = null;
+		if(props.result === 'LOSER'){
+			resultStyle = { color: 'red'};
+		} else {
+			resultStyle = { color: 'green'};
+		}
+		result = <h2 style={resultStyle}>{props.result}</h2>;
+	}
 	return (
 		<div className="comp">
+			{result}
 			<h3>{props.petName} Likes: {props.likesCount}</h3>
 			<img
 				src={props.petImageUrl}
