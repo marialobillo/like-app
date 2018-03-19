@@ -23,9 +23,11 @@ class PetGame extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			cat: { likesCount: 0, result: '', imageUrl: '' },
-			dog: { likesCount: 0, result: '', imageUrl: '' }
+			cat: { result: '', imageUrl: '' },
+			dog: { result: '', imageUrl: '' }
 		};
+		this.catLikesCount = 0;
+		this.dogLikesCount = 0;
 		this.handleLikeBtnClick = this.handleLikeBtnClick.bind(this);
 		this.handleDislikeBtnClick = this.handleDislikeBtnClick.bind(this);
 		this.handleShowWinnerBtnClick = this.handleShowWinnerBtnClick.bind(this);
@@ -41,7 +43,7 @@ class PetGame extends React.Component {
 
 					this.setState(function(prevState) {
 						return {
-							cat: { likesCount: prevState.cat.likesCount, result: prevState.cat.result, imageUrl: imageUrl }
+							cat: { result: prevState.cat.result, imageUrl: imageUrl }
 						};
 					});
 				}.bind(this));
@@ -53,7 +55,7 @@ class PetGame extends React.Component {
 
 					this.setState(function(prevState) {
 						return {
-							dog: { likesCount: prevState.dog.likesCount, result: prevState.dog.result, imageUrl: imageUrl }
+							dog: { result: prevState.dog.result, imageUrl: imageUrl }
 						};
 					});
 				}.bind(this));
@@ -67,17 +69,9 @@ class PetGame extends React.Component {
 		var petName = event.target.value;
 
 		if (petName === 'Cat') {
-			this.setState(function(prevState) {
-				return {
-					cat: { likesCount: prevState.cat.likesCount + 1, result: prevState.cat.result, imageUrl: prevState.cat.imageUrl }
-				};
-			});
+			this.catLikesCount += 1;
 		} else if (petName === 'Dog') {
-			this.setState(function(prevState) {
-				return {
-					dog: { likesCount: prevState.dog.likesCount + 1, result: prevState.dog.result, imageUrl: prevState.dog.imageUrl }
-				};
-			});
+			this.dogLikesCount += 1;
 		}
 	}
 	handleDislikeBtnClick(event) {
@@ -85,22 +79,14 @@ class PetGame extends React.Component {
 		var petName = event.target.value;
 
 		if (petName === 'Cat') {
-			this.setState(function(prevState) {
-				return {
-					cat: { likesCount: prevState.cat.likesCount - 1, result: prevState.cat.result, imageUrl: prevState.cat.imageUrl }
-				};
-			});
+			this.catLikesCount -= 1;
 		} else if (petName === 'Dog') {
-			this.setState(function(prevState) {
-				return {
-					dog: { likesCount: prevState.dog.likesCount - 1, result: prevState.dog.result, imageUrl: prevState.dog.imageUrl }
-				};
-			});
+			this.dogLikesCount -= 1;
 		}
 	}
 	handleShowWinnerBtnClick() {
-		var catLikesCount = this.state.cat.likesCount;
-		var dogLikesCount = this.state.dog.likesCount;
+		var catLikesCount = this.catLikesCount;
+		var dogLikesCount = this.dogLikesCount;
 		var catResult = 'TIE';
 		var dogResult = 'TIE';
 
@@ -114,16 +100,18 @@ class PetGame extends React.Component {
 
 		this.setState(function(prevState) {
 			return {
-				cat: { likesCount: prevState.cat.likesCount, result: catResult, imageUrl: prevState.cat.imageUrl },
-				dog: { likesCount: prevState.dog.likesCount, result: dogResult, imageUrl: prevState.dog.imageUrl }
+				cat: { result: catResult, imageUrl: prevState.cat.imageUrl },
+				dog: { result: dogResult, imageUrl: prevState.dog.imageUrl }
 			};
 		});
 	}
 	handleStartOverBtnClick() {
 		this.fetchImages();
+		this.catLikesCount = 0;
+		this.dogLikesCount = 0;
 		this.setState({
-			cat: { likesCount: 0, result: '', imageUrl: '' },
-			dog: { likesCount: 0, result: '', imageUrl: '' }
+			cat: { result: '', imageUrl: '' },
+			dog: { result: '', imageUrl: '' }
 		});
 	}
 	render() {
@@ -132,7 +120,7 @@ class PetGame extends React.Component {
 				<div style={{marginTop: 60, textAlign: 'center'}}>
 					<PetComponent
 						petName="Cat"
-						likesCount={this.state.cat.likesCount}
+						likesCount={this.catLikesCount}
 						petImageUrl={this.state.cat.imageUrl}
 						result={this.state.cat.result}
 						onLikeBtnClick={this.handleLikeBtnClick}
@@ -140,7 +128,7 @@ class PetGame extends React.Component {
 					/>
 					<PetComponent
 						petName="Dog"
-						likesCount={this.state.dog.likesCount}
+						likesCount={this.dogLikesCount}
 						petImageUrl={this.state.dog.imageUrl}
 						result={this.state.dog.result}
 						onLikeBtnClick={this.handleLikeBtnClick}
