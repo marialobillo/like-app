@@ -1,7 +1,6 @@
 var React = require('react');
 var axios = require('axios');
 var PetComponent = require('./PetComponent');
-var Header = require('./Header');
 
 var style = {
 	textAlign: 'center',
@@ -130,7 +129,6 @@ class PetGame extends React.Component {
 	render() {
 		return (
 			<div>
-				<Header />
 				<div style={{marginTop: 60, textAlign: 'center'}}>
 					<PetComponent
 						petName="Cat"
