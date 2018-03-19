@@ -1,6 +1,7 @@
 var React = require('react');
 var axios = require('axios');
 var PetComponent = require('./PetComponent');
+var Header = require('./Header');
 
 var style = {
 	textAlign: 'center',
@@ -19,7 +20,7 @@ var API_KEY = '123456789';
 var CAT_URL = 'http://localhost:63000/cat/?api_key=' + API_KEY;
 var DOG_URL = 'http://localhost:63000/dog/?api_key=' + API_KEY;
 
-class HomePage extends React.Component {
+class PetGame extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -129,9 +130,7 @@ class HomePage extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1 style={style}>
-					Welcome to Cat and Dog Cuteness Fight Game!!!
-				</h1>
+				<Header />
 				<div style={{marginTop: 60, textAlign: 'center'}}>
 					<PetComponent
 						petName="Cat"
@@ -160,4 +159,4 @@ class HomePage extends React.Component {
 	}
 }
 
-module.exports = HomePage;
+module.exports = PetGame;
