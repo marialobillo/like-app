@@ -15,10 +15,15 @@ var PetComponent = function(props){
 		result = <h2 style={resultStyle}>{props.result}</h2>;
 		disabled = true;
 	}
+
 	return (
 		<div className="comp">
 			{result}
-			<h3>{props.petName} Likes: {props.likesCount}</h3>
+			{(props.result) ? (
+				<h3>{props.petName} Likes: {props.likesCount}</h3>
+			) : (
+				<h3>{props.petName}</h3>
+			)}
 			<img
 				src={props.petImageUrl}
 				alt="cute pet"
