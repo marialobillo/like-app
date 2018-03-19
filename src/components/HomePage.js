@@ -26,33 +26,31 @@ class HomePage extends React.Component{
 	}
 	fetchCatImage(){
 		axios.get(CAT_URL)
-					.then(function(resp){
-						var imageUrl = resp.data.imageUrl;
+				.then(function(resp) {
+					var imageUrl = resp.data.imageUrl;
 
-						this.setState(function(prevState){
-							return {
-								cat: { likesCount: prevState.cat.likesCount,
-											 result: prevState.cat.result,
-											 imgUrl: imgUrl
-										 }
-							};
-						});
+					this.setState(function(prevState) {
+						return {
+							cat: { likesCount: prevState.cat.likesCount,
+										 result: prevState.cat.result,
+										 imageUrl: imageUrl }
+						};
 					});
+				}.bind(this));
 	}
 	fetchDogImage(){
 		axios.get(DOG_URL)
-					.then(function(resp){
-						var imageUrl = resp.data.imageUrl;
+				.then(function(resp) {
+					var imageUrl = resp.data.imageUrl;
 
-						this.setState(function(prevState){
-							return {
-								dog: { likesCount: prevState.dog.likesCount,
-											 result: prevState.dog.result,
-											 imgUrl: imgUrl
-										 }
-							};
-						});
+					this.setState(function(prevState) {
+						return {
+							dog: { likesCount: prevState.dog.likesCount,
+										 result: prevState.dog.result,
+										 imageUrl: imageUrl }
+						};
 					});
+				}.bind(this));
 	}
 
 	handleLikeBtnClick(event){
@@ -135,8 +133,8 @@ class HomePage extends React.Component{
 	handleStartOverBtnClick(){
 		this.setState(() => {
 			return {
-				cat: {likesCount: 0, result: ''},
-				dog: {likesCount: 0, result: ''}
+				cat: {likesCount: 0, result: '', imageUrl: ''},
+				dog: {likesCount: 0, result: '', imageUrl: ''}
 			}
 		});
 	}
