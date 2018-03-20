@@ -36,8 +36,9 @@ class PetGame extends React.Component {
 	componentDidMount() {
 		this.fetchImages();
 	}
-	
+
 	fetchPetImage(PET_URL, petName){
+		petName = petName.toLowerCase();
 		axios.get(PET_URL)
 				.then(function(resp){
 					var imageUrl = resp.data.imageUrl;
@@ -52,8 +53,9 @@ class PetGame extends React.Component {
 				}.bind(this));
 	}
 	fetchImages() {
-		this.fetchCatImage();
-		this.fetchDogImage();
+		this.fetchPetImage(CAT_URL, 'Cat');
+		this.fetchPetImage(DOG_URL, 'Dog');
+
 	}
 	handleLikeDislikeBtnClicks(petName, operation){
 		this.fetchImages();
