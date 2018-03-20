@@ -36,27 +36,18 @@ class PetGame extends React.Component {
 	componentDidMount() {
 		this.fetchImages();
 	}
-	fetchCatImage() {
-		axios.get(CAT_URL)
-				.then(function(resp) {
+	
+	fetchPetImage(PET_URL, petName){
+		axios.get(PET_URL)
+				.then(function(resp){
 					var imageUrl = resp.data.imageUrl;
-
-					this.setState(function(prevState) {
-						return {
-							cat: { result: prevState.cat.result, imageUrl: imageUrl }
+					this.setState((prevState) => {
+						var state = {};
+						state[petName] = {
+							result: prevState[petName].result,
+							imageUrl: imageUrl
 						};
-					});
-				}.bind(this));
-	}
-	fetchDogImage() {
-		axios.get(DOG_URL)
-				.then(function(resp) {
-					var imageUrl = resp.data.imageUrl;
-
-					this.setState(function(prevState) {
-						return {
-							dog: { result: prevState.dog.result, imageUrl: imageUrl }
-						};
+						return state;
 					});
 				}.bind(this));
 	}
@@ -64,25 +55,20 @@ class PetGame extends React.Component {
 		this.fetchCatImage();
 		this.fetchDogImage();
 	}
-	handleLikeBtnClick(event) {
+	handleLikeDislikeBtnClicks(petName, operation){
 		this.fetchImages();
-		var petName = event.target.value;
 
 		if (petName === 'Cat') {
-			this.catLikesCount += 1;
+			this.catLikesCount += operation;
 		} else if (petName === 'Dog') {
-			this.dogLikesCount += 1;
+			this.dogLikesCount += operation;
 		}
 	}
+	handleLikeBtnClick(event) {
+		this.handleLikeDislikeBtnClicks(event.target.value, 1);
+	}
 	handleDislikeBtnClick(event) {
-		this.fetchImages();
-		var petName = event.target.value;
-
-		if (petName === 'Cat') {
-			this.catLikesCount -= 1;
-		} else if (petName === 'Dog') {
-			this.dogLikesCount -= 1;
-		}
+		this.handleLikeDislikeBtnClicks(event.target.value, -1);
 	}
 	handleShowWinnerBtnClick() {
 		var catLikesCount = this.catLikesCount;
