@@ -1,5 +1,9 @@
 var React = require('react');
+var constants = require('../constants');
 
+
+var LOSER = constants.LOSER;
+var CUTE = constants.CUTE;
 
 var PetComponent = function(props){
 	var result = null;
@@ -7,7 +11,7 @@ var PetComponent = function(props){
 
 	if (props.result !== ''){
 		var resultStyle = {};
-		if(props.result === 'LOSER'){
+		if(props.result === LOSER){
 			resultStyle = { color: 'red'};
 		} else {
 			resultStyle = { color: 'green'};
@@ -26,7 +30,7 @@ var PetComponent = function(props){
 			)}
 			<img
 				src={props.petImageUrl}
-				alt="cute pet"
+				alt={ CUTE + " pet"}
 				className="pet_image"
 			/>
 			<br />
