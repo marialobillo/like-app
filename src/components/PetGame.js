@@ -1,20 +1,14 @@
 var React = require('react');
 var axios = require('axios');
 var PetComponent = require('./PetComponent');
+var constants = require('../constants');
 
-var style = {
-	textAlign: 'center',
-	fontSize: '2em',
-	color: 'rebeccapurple'
-};
-
-var btnStyle = {
-	marginTop: '30px',
-	marginRight: '5px',
-	height: '25px'
-};
-
-var API_KEY = '123456789';
+var CAT = constants.CAT;
+var DOG = constants.DOG;
+var WINNER = constants.WINNER;
+var LOSER = constants.LOSER;
+var TIE = constants.TIE;
+var API_KEY = constants.API_KEY;
 
 var CAT_URL = 'http://localhost:63000/cat/?api_key=' + API_KEY;
 var DOG_URL = 'http://localhost:63000/dog/?api_key=' + API_KEY;
@@ -53,16 +47,16 @@ class PetGame extends React.Component {
 				}.bind(this));
 	}
 	fetchImages() {
-		this.fetchPetImage(CAT_URL, 'Cat');
-		this.fetchPetImage(DOG_URL, 'Dog');
+		this.fetchPetImage(CAT_URL, CAT);
+		this.fetchPetImage(DOG_URL, DOG);
 
 	}
 	handleLikeDislikeBtnClicks(petName, operation){
 		this.fetchImages();
 
-		if (petName === 'Cat') {
+		if (petName === CAT) {
 			this.catLikesCount += operation;
-		} else if (petName === 'Dog') {
+		} else if (petName === DOG) {
 			this.dogLikesCount += operation;
 		}
 	}
@@ -75,15 +69,15 @@ class PetGame extends React.Component {
 	handleShowWinnerBtnClick() {
 		var catLikesCount = this.catLikesCount;
 		var dogLikesCount = this.dogLikesCount;
-		var catResult = 'TIE';
-		var dogResult = 'TIE';
+		var catResult = TIE;
+		var dogResult = TIE;
 
 		if (catLikesCount > dogLikesCount) {
-			catResult = 'WINNER';
-			dogResult = 'LOSER';
+			catResult = WINNER;
+			dogResult = LOSER;
 		} else if (catLikesCount < dogLikesCount) {
-			catResult = 'LOSER';
-			dogResult = 'WINNER';
+			catResult = LOSER;
+			dogResult = WINNER;
 		}
 
 		this.setState(function(prevState) {
@@ -107,7 +101,7 @@ class PetGame extends React.Component {
 			<div>
 				<div style={{marginTop: 60, textAlign: 'center'}}>
 					<PetComponent
-						petName="Cat"
+						petName={CAT}
 						likesCount={this.catLikesCount}
 						petImageUrl={this.state.cat.imageUrl}
 						result={this.state.cat.result}
@@ -115,7 +109,7 @@ class PetGame extends React.Component {
 						onDislikeBtnClick={this.handleDislikeBtnClick}
 					/>
 					<PetComponent
-						petName="Dog"
+						petName={DOG}
 						likesCount={this.dogLikesCount}
 						petImageUrl={this.state.dog.imageUrl}
 						result={this.state.dog.result}
@@ -125,8 +119,8 @@ class PetGame extends React.Component {
 				</div>
 				<div style={{textAlign: 'center'}}>
 					{!this.state.dog.result &&
-						<button style={btnStyle} onClick={this.handleShowWinnerBtnClick}>Show Winner</button>}
-					<button style={btnStyle} onClick={this.handleStartOverBtnClick}>Start Over</button>
+						<button className="btn btn-lg btn-danger" onClick={this.handleShowWinnerBtnClick}>Show Winner</button>}
+					<button className="btn btn-lg btn-dark" onClick={this.handleStartOverBtnClick}>Start Over</button>
 				</div>
 			</div>
 		);
